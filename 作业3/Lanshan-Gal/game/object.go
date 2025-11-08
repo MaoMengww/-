@@ -63,7 +63,7 @@ func GrtInit() *model.Upclassman {
 		Info: model.Info{
 			Name:    "郭瑞彤",
 			Age:     19,
-			Details: "贺一鸣学姐是重庆最高学府重庆邮电大学蓝山工作室的go组的成员,qq顶着幸运星柊镜的头像,然而没有人会因此小看他",
+			Details: "郭瑞彤学姐是重庆最高学府重庆邮电大学蓝山工作室的go组的成员,qq顶着幸运星柊镜的头像,然而没有人会因此小看他",
 			Group:        "蓝山工作室",
 		},
 		Favorability: 30,
