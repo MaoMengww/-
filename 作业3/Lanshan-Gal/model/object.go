@@ -2,19 +2,18 @@ package model
 
 //可攻略学姐详情
 type Upclassman struct {
-	Info         Info //可攻略学姐详情
-	Group        string   //可攻略学姐组织
-	Favorability int      //好感度
-	Events       []Event  //会遇到的事件
+	Info         Info
+	Favorability int     //好感度
+	Events       []Event //会遇到的事件
 }
 
-//学姐事件
+//学姐信息
 type Info struct {
 	Name    string
 	Age     int
+	Group   string //可攻略学姐组织
 	Details string //对学姐的描述
 }
-
 
 //随机事件
 type Event struct {
@@ -23,7 +22,6 @@ type Event struct {
 	Options     []Option //选项
 }
 
-
 //随机事件选项
 type Option struct {
 	Id                 int    //选项id(1,2,3)
@@ -31,7 +29,6 @@ type Option struct {
 	FavorabilityChange int    //选项得分(好感度更改)
 	Result             string //选项结果
 }
-
 
 //修改好感度
 //func (u *Upclassman) UpdateFavorability(amount int) {
