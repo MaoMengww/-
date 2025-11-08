@@ -59,7 +59,7 @@ func story() {
 	object := &model.Upclassman{}
 Loop:
 	for {
-		fmt.Println("请输入你想要攻略的角色(1.康桥	2.cy	3.郭瑞彤	4.王家宽	5.贺一鸣   6.沈峻宇)")
+		fmt.Println("请输入你想要攻略的角色(1.康桥	2.cy   3.郭瑞彤   4.王家宽	5.贺一鸣   6.沈峻宇)")
 		scanner.Scan()
 		choi := scanner.Text()
 		switch choi {
@@ -101,6 +101,7 @@ Loop:
 		scanner.Scan()
 		shortDescription = scanner.Text()
 		if playerDescription != "" {
+			fmt.Println("小故事生成中......")
 			resp := server.CreateStory(object,player, shortDescription)
 			fmt.Println(resp)
 			break
