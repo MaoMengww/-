@@ -1,4 +1,4 @@
-package initialize
+package game
 
 import (
 	"Lanshan-gal/model"
@@ -10,14 +10,28 @@ import (
 	"time"
 )
 
+var scanner = bufio.NewScanner(os.Stdin)
+
 func Body() {
 	fmt.Println("----欢迎来到游戏:YourGal----")
 	time.Sleep(1 * time.Second)
 	fmt.Println("**做烂勿喷**")
 	time.Sleep(1 * time.Second)
-	fmt.Println("欢迎来到“重庆最高学府”重庆邮电大学大学！在这片被“3G”雕像祝福的土地上，“红岩”的传说与代码的魔法交织。你，一个误入此地的新生，必须在“蓝山工作室”的传奇（内卷）与吉祥物“邮宝”那看穿一切的眼神中活下来，并……开始你的约会大作战")
+	fmt.Println("欢迎来到“重庆最高学府”重庆邮电大学大学！在这片被“3G”雕像祝福的土地上,“红岩”的传说与代码的魔法交织。你,一个误入此地的新生,必须在“蓝山工作室”的传奇（内卷）与吉祥物“邮宝”那看穿一切的眼神中活下来,并……开始你的约会大作战")
+	fmt.Println("请选择游戏模式:1.生成小故事    2.旮旯给木模式（未完成）")
+	scanner.Scan()
+	choi := scanner.Text()
+	switch choi {
+	case "1":
+		story()
+	case "2":
+		fmt.Println("此模式未完成")
+	}
+}
+
+//生成爱情小故事
+func story() {
 	var playerName string
-	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("请输入你的名字: ")
 		scanner.Scan()
@@ -26,29 +40,28 @@ func Body() {
 		if playerName != "" {
 			break
 		}
-		fmt.Println("名字不能为空，请重新输入。")
+		fmt.Println("名字不能为空,请重新输入。")
 	}
 	var playerDescription string
 	for {
-		fmt.Printf("很好，%s。请用一句话描述你自己,不超过20字: ", playerName)
+		fmt.Printf("很好,%s。请用一句话描述你自己,不超过20字: ", playerName)
 		scanner.Scan()
 		playerDescription = scanner.Text()
 		playerDescription = strings.TrimSpace(playerDescription)
 		if playerDescription != "" {
 			break
 		}
-		fmt.Println("描述不能为空，请重新输入。")
+		fmt.Println("描述不能为空,请重新输入。")
 	}
 	
 	player := model.Player{}
 	player.Add(playerName, playerDescription)
-	var choi string
 	object := &model.Upclassman{}
 Loop:
 	for {
 		fmt.Println("请输入你想要攻略的角色(1.康桥   2.cy)")
 		scanner.Scan()
-		choi = scanner.Text()
+		choi := scanner.Text()
 		switch choi {
 		case "1":
 			object = KqInit()
@@ -60,7 +73,7 @@ Loop:
 			fmt.Println("你选择了cy学姐")
 			break Loop
 		default:
-			fmt.Println("输入无效，没有这个选项，请重新输入。")
+			fmt.Println("输入无效,没有这个选项,请重新输入。")
 			fmt.Println()
 		}
 	}

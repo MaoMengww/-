@@ -1,7 +1,9 @@
 package main
+import(
+	"Lanshan-gal/game"
+)
 
-import "Lanshan-gal/initialize"
 
 func main() {
-	initialize.Body()
+	game.Body()
 }
