@@ -1,6 +1,6 @@
 package model
 type people interface{
-	Add(name string, discription string)
+	Add(name string, description string)
 }
 type Player struct {
 	Name string
