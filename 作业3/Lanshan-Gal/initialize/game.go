@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"Lanshan-gal/model"
+	"Lanshan-gal/server"
 	"bufio"
 	"fmt"
 	"os"
@@ -12,7 +13,7 @@ import (
 func Body() {
 	fmt.Println("----欢迎来到游戏:YourGal----")
 	time.Sleep(1 * time.Second)
-	fmt.Println("**做烂勿骂**")
+	fmt.Println("**做烂勿喷**")
 	time.Sleep(1 * time.Second)
 	fmt.Println("欢迎来到“重庆最高学府”重庆邮电大学大学！在这片被“3G”雕像祝福的土地上，“红岩”的传说与代码的魔法交织。你，一个误入此地的新生，必须在“蓝山工作室”的传奇（内卷）与吉祥物“邮宝”那看穿一切的眼神中活下来，并……开始你的约会大作战")
 	var playerName string
@@ -39,7 +40,7 @@ func Body() {
 		fmt.Println("描述不能为空，请重新输入。")
 	}
 	
-	player := model.User{}
+	player := model.Player{}
 	player.Add(playerName, playerDescription)
 	var choi string
 	object := &model.Upclassman{}
@@ -64,13 +65,14 @@ Loop:
 		}
 	}
 	var shortDescription string
-	fmt.Printf("%v学姐的拓展背景的基础背景是%v\n", object.Info.Name, object.Info.Details)
+	fmt.Printf("%v学姐的基础背景是：%v\n", object.Info.Name, object.Info.Details)
+	time.Sleep(1*time.Second)
 	for {
 		fmt.Printf("请输入对%v学姐的拓展背景:", object.Info.Name)
 		scanner.Scan()
 		shortDescription = scanner.Text()
 		if playerDescription != "" {
-			resp := object.Tempgame(player, shortDescription)
+			resp := server.CreateStory(object,player, shortDescription)
 			fmt.Println(resp)
 			break
 		}
