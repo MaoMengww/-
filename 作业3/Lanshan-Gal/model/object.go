@@ -5,6 +5,7 @@ type Upclassman struct {
 	Info         Info
 	Favorability int     //好感度
 	Events       []Event //会遇到的事件
+	Cgs          []Cg    //特殊cg
 }
 
 //学姐信息
@@ -30,6 +31,33 @@ type Option struct {
 	Result             string //选项结果
 }
 
+//特殊cg
+type Cg struct {
+	Id      int    //cgId(1,2,3)
+	Content string //cg内容
+}
+
+
+type Object interface{
+	JudgFavorability() int
+	UpdateFavorability(amount int)
+}
+
+
 //修改好感度
-//func (u *Upclassman) UpdateFavorability(amount int) {
-//	u.Favorability += amount
+func (u *Upclassman) UpdateFavorability(amount int) {
+	u.Favorability += amount
+}
+
+
+//判断特殊cg
+func (u *Upclassman) JudgFavorability() int {
+    switch {
+    case u.Favorability > 100:
+        return 1
+    case u.Favorability < 0:
+        return 2
+    default:
+        return 3
+    }
+}
