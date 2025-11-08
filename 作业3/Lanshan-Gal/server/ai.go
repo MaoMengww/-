@@ -12,7 +12,7 @@ import (
 	"google.golang.org/genai"
 )
 
-
+//生成小故事
 func  CreateStory(u *model.Upclassman,player model.Player, shortDescription string) string {
 	ctx := context.Background()
 	client, _ := genai.NewClient(ctx, nil)
