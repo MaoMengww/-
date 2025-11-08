@@ -45,13 +45,18 @@ func Body() {
 	object := &model.Upclassman{}
 Loop:
 	for {
-		fmt.Println("请输入你想要攻略的角色(1.康桥)")
+		fmt.Println("请输入你想要攻略的角色(1.康桥   2.cy)")
 		scanner.Scan()
 		choi = scanner.Text()
 		switch choi {
 		case "1":
 			object = KqInit()
 			fmt.Println("你选择了康桥学姐")
+			break Loop
+		
+		case "2":
+			object = CyInit()
+			fmt.Println("你选择了cy学姐")
 			break Loop
 		default:
 			fmt.Println("输入无效，没有这个选项，请重新输入。")
