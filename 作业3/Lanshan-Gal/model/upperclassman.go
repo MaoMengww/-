@@ -125,8 +125,8 @@ func (u *Upclassman) UpdateFavorability(amount int) {
 
 func (u *Upclassman) Tempgame(player User, shortDescription string) string {
 	ctx := context.Background()
-	client, err := genai.NewClient(ctx, nil)
-	userPrompt := fmt.Sprintf("你是一个galgame编剧，请你根据可攻略对象的基础背景和玩家给出的拓展背景，和玩家本身的描述写一段玩家和可攻略对象的galgame剧情，无选项，基础背景是%v,拓展背景是%v,玩家姓名时%v,玩家描述是%v", u.Info.Details, shortDescription, player.Name, player.ShortDescription)
+	client, _ := genai.NewClient(ctx, nil)
+	userPrompt := fmt.Sprintf("你是一个galgame编剧，请你根据可攻略对象的基础背景和玩家给出的拓展背景和对玩家本身的描述写一段玩家和可攻略对象的galgame完整剧情，大于1000字，无选项，基础背景是%v,拓展背景是%v,玩家姓名时%v,玩家本身的描述是%v", u.Info.Details, shortDescription, player.Name, player.ShortDescription)
 
 	 resp, err := client.Models.GenerateContent(
         ctx,

@@ -64,8 +64,9 @@ Loop:
 		}
 	}
 	var shortDescription string
+	fmt.Printf("%v学姐的拓展背景的基础背景是%v\n", object.Info.Name, object.Info.Details)
 	for {
-		fmt.Printf("请输入对%v学姐的拓展背景", object.Info.Name)
+		fmt.Printf("请输入对%v学姐的拓展背景:", object.Info.Name)
 		scanner.Scan()
 		shortDescription = scanner.Text()
 		if playerDescription != "" {
