@@ -59,7 +59,7 @@ func story() {
 	object := &model.Upclassman{}
 Loop:
 	for {
-		fmt.Println("请输入你想要攻略的角色(1.康桥   2.cy)")
+		fmt.Println("请输入你想要攻略的角色(1.康桥	2.cy	3.郭瑞彤	4.王家宽	5.贺一鸣   6.沈峻宇)")
 		scanner.Scan()
 		choi := scanner.Text()
 		switch choi {
@@ -71,6 +71,22 @@ Loop:
 		case "2":
 			object = CyInit()
 			fmt.Println("你选择了cy学姐")
+			break Loop
+		case "3":
+			object = GrtInit()
+			fmt.Println("你选择了郭瑞彤学姐")
+			break Loop
+		case "4":
+			object = WjkInit()
+			fmt.Println("你选择了王家宽学姐")
+			break Loop
+		case "5":
+			object = HymInit()
+			fmt.Println("你选择了贺一鸣学姐")
+			break Loop
+		case "6":
+			object = SjyInit()
+			fmt.Println("你选择了沈峻宇学姐")
 			break Loop
 		default:
 			fmt.Println("输入无效,没有这个选项,请重新输入。")
