@@ -13,7 +13,6 @@ import (
 
 var wg sync.WaitGroup
 
-
 type task struct { //任务
 	filePath string
 	keyWord  string
@@ -50,12 +49,14 @@ func searchFile(filePath, word string, jobs []chan task) {
 		return nil
 	})
 	if err != nil {
-		log.Fatalf("遍历文件失败")
+		log.Printf("无法打开文件")
+		return
 	}
 }
 
 // 在文件中搜寻keyword
 func searchInFile(filePath, keyWord string, resultChan chan<- result) {
+	defer wg.Done()
 	file, err := os.Open(filePath)
 	if err != nil {
 		log.Printf("无法打开文件")
@@ -86,11 +87,10 @@ func searchInFile(filePath, keyWord string, resultChan chan<- result) {
 func worker(jobs <-chan task, reresults chan<- result) {
 	for job := range jobs {
 		searchInFile(job.filePath, job.keyWord, reresults)
-		wg.Done()
 	}
 }
 
-//打印结果
+// 打印结果
 func printResults(reresults <-chan result, done chan<- bool) {
 	for res := range reresults {
 		fmt.Printf("%s:%d:%s\n", res.filePath, res.lineNum, res.content)
@@ -110,21 +110,27 @@ func main() {
 	//每个工人一个专属通道
 	jobs := make([]chan task, workerNum)
 	reresults := make(chan result, 100)
-	printDone := make(chan bool)
+	printDone := make(chan bool) // 用于等待打印完成
+
 	for i := range workerNum {
 		jobs[i] = make(chan task, 100)
-	}
-	for i := range 100 {
-		go worker(jobs[i], reresults)
 	}
 
 	//启动打印协程
 	go printResults(reresults, printDone)
+
+	//启动员工
+	for i := range 100 {
+		go worker(jobs[i], reresults)
+	}
+
 	//分发任务
-	go searchFile(filePath, keyWord, jobs)
+	searchFile(filePath, keyWord, jobs)
 	wg.Wait()
 	close(reresults)
-	fmt.Println("成功完成任务，开始打印")
+	fmt.Println("所有文件搜索完成，正在等待打印...")
+
 	<-printDone
-	fmt.Println("搜索完成")
+
+	fmt.Println("搜索和打印均已完成")
 }
